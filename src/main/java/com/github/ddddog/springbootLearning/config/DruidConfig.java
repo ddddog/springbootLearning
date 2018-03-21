@@ -44,8 +44,7 @@ public class DruidConfig {
 		properties.put("minIdle", env.getProperty("spring.datasource.minIdle"));
 		properties.put("maxActive", env.getProperty("spring.datasource.maxActive"));
 		properties.put("maxWait", env.getProperty("spring.datasource.maxWait"));
-		properties.put("timeBetweenEvictionRunsMillis",
-				env.getProperty("spring.datasource.timeBetweenEvictionRunsMillis"));
+		properties.put("timeBetweenEvictionRunsMillis",env.getProperty("spring.datasource.timeBetweenEvictionRunsMillis"));
 		properties.put("minEvictableIdleTimeMillis", env.getProperty("spring.datasource.minEvictableIdleTimeMillis"));
 		properties.put("validationQuery", env.getProperty("spring.datasource.validationQuery"));
 		properties.put("filters", env.getProperty("spring.datasource.druid.sys.filters"));
@@ -53,7 +52,6 @@ public class DruidConfig {
 		properties.put("testWhileIdle", env.getProperty("spring.datasource.testWhileIdle"));
 		properties.put("testOnBorrow", env.getProperty("spring.datasource.testOnBorrow"));
 		properties.put("testOnReturn", env.getProperty("spring.datasource.testOnReturn"));
-		logger.info("1111111" + env.getProperty("spring.datasource.driverClassName"));
 		return DruidDataSourceFactory.createDataSource(properties);
 	}
 

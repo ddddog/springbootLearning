@@ -26,9 +26,9 @@
 		<!-- 生成 JavaBean 对象重写 equals 和 hashCode 方法 -->
 		<plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin" />
 		<!-- jdbc 连接配置 -->
-		<jdbcConnection driverClass="${spring.datasource.driverClassName}"
-			connectionURL="${spring.datasource.url}" userId="${spring.datasource.username}"
-			password="${spring.datasource.password}">
+		<jdbcConnection driverClass="${common.datasource.driverClassName}"
+			connectionURL="${common.datasource.url}" userId="${common.datasource.username}"
+			password="${common.datasource.password}">
 		</jdbcConnection>
 		<!-- 生成模型的包名和位置 -->
 		<javaModelGenerator targetPackage="${targetModelPackage}"
@@ -45,7 +45,7 @@
 		<!-- <generatedKey column="id" sqlStatement="select SEQ_{1}.nextval from 
 			dual" identity="false" type="pre"/> -->
 		<!-- tableName：数据库表名，domainObjectName：生成文件名 ，schema：数据源 -->
-		<table tableName="stock">
+		<table tableName="log">
 			<generatedKey column="id" sqlStatement="Mysql" identity="true" />
 		</table>
 	</context>
