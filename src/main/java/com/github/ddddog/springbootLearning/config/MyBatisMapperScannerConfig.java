@@ -8,14 +8,11 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.env.Environment;
 
-import com.github.ddddog.springbootLearning.bus.config.MyBatisBusConfig;
-import com.github.ddddog.springbootLearning.common.config.MyBatisCommonConfig;
-
 import tk.mybatis.spring.mapper.MapperScannerConfigurer;
 
-//@Configuration
+@Configuration
 // 必须在MyBatisConfig注册后再加载MapperScannerConfigurer，否则会报错
-@AutoConfigureAfter({MyBatisBusConfig.class,MyBatisCommonConfig.class})
+@AutoConfigureAfter({MyBatisConfig.class})
 public class MyBatisMapperScannerConfig implements EnvironmentAware{	
 
 	private String basePackage;
@@ -27,7 +24,7 @@ public class MyBatisMapperScannerConfig implements EnvironmentAware{
 	private String identity;
 	
 	@Bean
-	public MapperScannerConfigurer mapperScannerBusConfigurer() {
+	public MapperScannerConfigurer mapperScannerConfigurer() {
 		
 		MapperScannerConfigurer mapperScannerConfigurer = new MapperScannerConfigurer();
 		mapperScannerConfigurer.setSqlSessionFactoryBeanName("sqlSessionFactory");

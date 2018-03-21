@@ -7,8 +7,8 @@ import org.springframework.transaction.annotation.Isolation;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.github.ddddog.springbootLearning.bus.entity.Stock;
-import com.github.ddddog.springbootLearning.mapper.bus.StockMapper;
+import com.github.ddddog.springbootLearning.entity.Stock;
+import com.github.ddddog.springbootLearning.mapper.StockMapper;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -42,7 +42,7 @@ public class StockService {
         if(StringUtils.isNotBlank(number)){
         	//stock.setNumber(number);
         }	
-        this.stockMapper.query(stock);  
+        this.stockMapper.select(stock);  
         return page.toPageInfo();  
     }
     

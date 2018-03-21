@@ -1,4 +1,4 @@
-package com.github.ddddog.springbootLearning.bus.config;
+package com.github.ddddog.springbootLearning.config;
 import java.util.Properties;
 
 import javax.sql.DataSource;

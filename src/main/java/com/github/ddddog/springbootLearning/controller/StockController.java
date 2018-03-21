@@ -11,9 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.alibaba.druid.support.json.JSONUtils;
-import com.github.ddddog.springbootLearning.bus.entity.Stock;
-import com.github.ddddog.springbootLearning.service.LogService;
+import com.github.ddddog.springbootLearning.entity.Stock;
 import com.github.ddddog.springbootLearning.service.StockService;
 import com.github.pagehelper.PageInfo;
 
@@ -22,8 +20,6 @@ public class StockController {
 	private Logger logger = LoggerFactory.getLogger(StockController.class);
     @Autowired
     StockService stockRepository;
-    @Autowired
-    LogService logService;
     ExecutorService executorService = Executors.newFixedThreadPool(10);
     @Autowired
     RedissonClient redissonClient;
@@ -38,7 +34,6 @@ public class StockController {
                     Stock stock = stockRepository.findById(id);
                     stock.setNumber(stock.getNumber() + 1);
                     stockRepository.save(stock);
-                    logService.info(JSONUtils.toJSONString(stock));
                 } finally {
                     lock.unlock();
                 }

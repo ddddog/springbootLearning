@@ -1,21 +1,17 @@
-package com.github.ddddog.springbootLearning.common.entity;
+package com.github.ddddog.springbootLearning.entity;
 
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.*;
 
-public class Log implements Serializable {
+public class Stock implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     /**
-     * 消息
+     * 数量
      */
-    private String message;
-
-    @Column(name = "crt_time")
-    private Date crtTime;
+    private Integer number;
 
     private static final long serialVersionUID = 1L;
 
@@ -34,35 +30,21 @@ public class Log implements Serializable {
     }
 
     /**
-     * 获取消息
+     * 获取数量
      *
-     * @return message - 消息
+     * @return number - 数量
      */
-    public String getMessage() {
-        return message;
+    public Integer getNumber() {
+        return number;
     }
 
     /**
-     * 设置消息
+     * 设置数量
      *
-     * @param message 消息
+     * @param number 数量
      */
-    public void setMessage(String message) {
-        this.message = message;
-    }
-
-    /**
-     * @return crt_time
-     */
-    public Date getCrtTime() {
-        return crtTime;
-    }
-
-    /**
-     * @param crtTime
-     */
-    public void setCrtTime(Date crtTime) {
-        this.crtTime = crtTime;
+    public void setNumber(Integer number) {
+        this.number = number;
     }
 
     @Override
@@ -72,8 +54,7 @@ public class Log implements Serializable {
         sb.append(" [");
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
-        sb.append(", message=").append(message);
-        sb.append(", crtTime=").append(crtTime);
+        sb.append(", number=").append(number);
         sb.append("]");
         return sb.toString();
     }
@@ -89,10 +70,9 @@ public class Log implements Serializable {
         if (getClass() != that.getClass()) {
             return false;
         }
-        Log other = (Log) that;
+        Stock other = (Stock) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getMessage() == null ? other.getMessage() == null : this.getMessage().equals(other.getMessage()))
-            && (this.getCrtTime() == null ? other.getCrtTime() == null : this.getCrtTime().equals(other.getCrtTime()));
+            && (this.getNumber() == null ? other.getNumber() == null : this.getNumber().equals(other.getNumber()));
     }
 
     @Override
@@ -100,8 +80,7 @@ public class Log implements Serializable {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getMessage() == null) ? 0 : getMessage().hashCode());
-        result = prime * result + ((getCrtTime() == null) ? 0 : getCrtTime().hashCode());
+        result = prime * result + ((getNumber() == null) ? 0 : getNumber().hashCode());
         return result;
     }
 }
