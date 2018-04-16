@@ -2,7 +2,7 @@ logging:
   config: classpath:logback.xml
   #path: d:/logs/sbl
 server:
-  port: 8080        
+  port: 8088        
 redisson:
     address: redis://192.168.1.24:6379
     password:

@@ -1,20 +1,26 @@
 package com.github.ddddog.springbootLearning.controller;
 
+import java.util.Stack;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.stream.Collectors;
 
 import org.redisson.api.RLock;
 import org.redisson.api.RedissonClient;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.github.ddddog.springbootLearning.entity.Stock;
 import com.github.ddddog.springbootLearning.service.StockService;
 import com.github.pagehelper.PageInfo;
 
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+@RequestMapping("/stock")
 @RestController
 public class StockController {
 	private Logger logger = LoggerFactory.getLogger(StockController.class);
@@ -23,6 +29,7 @@ public class StockController {
     ExecutorService executorService = Executors.newFixedThreadPool(10);
     @Autowired
     RedissonClient redissonClient;
+    
     final static Integer id = 1;
     @RequestMapping("/addStock")
     public void addStock() {
@@ -59,13 +66,8 @@ public class StockController {
      * @return 
      */  
     @RequestMapping("/queryPage")   
-    public void queryPage(){  
-        PageInfo<Stock> page = this.stockRepository.queryPage("", 1, 2); 
-        System.out.println("总页数=" + page.getPages());  
-        System.out.println("总记录数=" + page.getTotal()) ;
-        for(Stock u : page.getList()){
-            System.out.println(u.getId() + " \t " + u.getNumber());  
-        }
+    Flux<Stock> queryPage(){
+        return null;
     }  
     /** 
      * 测试事务 
@@ -80,8 +82,11 @@ public class StockController {
         }  
           
     }  
-    @RequestMapping("/log")
-    public void addLog() {
-    	
+    
+    @RequestMapping("/{id}")
+    public Mono<ResponseEntity<Stock>> getById(@PathVariable String id){
+        return Mono.just(stockRepository.findById(Integer.parseInt(id)))
+                .map(ResponseEntity::ok)
+                .defaultIfEmpty(ResponseEntity.status(404).body(null));
     }
 }
